@@ -54,7 +54,9 @@ class DownloadService {
         },
       });
       const clean = this.cleanLink(response.data);
-      this.saveImage(clean, destinationPath);
+      if (clean !== '') {
+        this.saveImage(clean, destinationPath);
+      }
       // save file to disk
       // eslint-disable-next-line no-param-reassign
 
