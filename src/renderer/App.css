@@ -9,10 +9,9 @@ body {
   background: #fff;
   font-family: sans-serif;
   overflow-y: hidden;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  /* justify-content: center; */
   padding-top: 3em;
-  /* make scrollable */
   overflow-y: scroll;
   /* align-items: center; */
 }
@@ -69,10 +68,35 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
 }
 
+.whole-body {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  /* put items in the center */
+  margin: 0 auto;
+  align-items: center;
+  /* border: 1px solid #ddd; */
+}
+
+td {
+  padding: 8px;
+  text-align: center;
+}

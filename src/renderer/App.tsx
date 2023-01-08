@@ -42,44 +42,64 @@ const Hello = () => {
   });
   return (
     <div>
-      <Button
-        onClick={() => {
-          window.electron.ipcRenderer.sendMessage('directory-selected', []);
-        }}
-      >
-        Select Directory
-      </Button>
-      <Typography.Text>{filePath}</Typography.Text>
-      {/* select file  */}
-      <Upload
-        accept=".xlsx, .xls, .csv"
-        beforeUpload={(file) => {
-          setFilePath(file.path);
-          window.electron.ipcRenderer.sendMessage('file-uploaded', [file.path]);
-          return false;
-        }}
-      >
-        <Button>Select File</Button>
-      </Upload>
-
-      <Button
-        onClick={() => {
-          window.electron.ipcRenderer.sendMessage('download-file', [
-            destinationPath,
-            data,
-          ]);
-        }}
-      >
-        Download Files
-      </Button>
-      <Button
-        onClick={() => {
-          window.location.reload();
-        }}
-      >
-        Clear Selection
-      </Button>
+      <table>
+        <tr>
+          <td>
+            <Button
+              onClick={() => {
+                window.electron.ipcRenderer.sendMessage(
+                  'directory-selected',
+                  []
+                );
+              }}
+            >
+              Select Directory
+            </Button>
+            <Typography.Text>{filePath}</Typography.Text>
+          </td>
+          {/* select file  */}
+          <td>
+            <Upload
+              accept=".xlsx, .xls, .csv"
+              beforeUpload={(file) => {
+                setFilePath(file.path);
+                window.electron.ipcRenderer.sendMessage('file-uploaded', [
+                  file.path,
+                ]);
+                return false;
+              }}
+            >
+              <Button>Select File</Button>
+            </Upload>
+          </td>
+        </tr>
+      </table>
       <Table columns={columns} dataSource={data} />
+      <table>
+        <tr>
+          <td>
+            <Button
+              onClick={() => {
+                window.electron.ipcRenderer.sendMessage('download-file', [
+                  destinationPath,
+                  data,
+                ]);
+              }}
+            >
+              Download Files
+            </Button>
+          </td>
+          <td>
+            <Button
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              Clear Selection
+            </Button>
+          </td>
+        </tr>
+      </table>
     </div>
   );
 };
