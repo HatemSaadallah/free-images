@@ -1,6 +1,9 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = 'file-uploaded' | 'directory-selected';
+export type Channels =
+  | 'file-uploaded'
+  | 'directory-selected'
+  | 'show-message-popup';
 
 const electronHandler = {
   ipcRenderer: {

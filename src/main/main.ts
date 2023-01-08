@@ -66,6 +66,20 @@ ipcMain.on('directory-selected', async function (event) {
   const dir = await dialog.showOpenDialog({
     properties: ['openDirectory'],
   });
+  if (!dir.canceled) {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Message',
+      message: 'Folder Selected',
+    });
+  } else {
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Message',
+      message: 'Folder Selection Cancelled',
+    });
+  }
+
   event.reply('directory-selected', dir.filePaths);
 });
 

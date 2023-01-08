@@ -21,7 +21,7 @@ const Hello = () => {
   // create hook
   const [filePath, setFilePath] = useState<string>('');
   const [destinationPath, setDestinationPath] = useState<string>('');
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<Array<any>>([]);
 
   // set up ipc listener
   window.electron.ipcRenderer.on('file-uploaded', (event) => {
@@ -36,23 +36,19 @@ const Hello = () => {
     setData(dataSource);
   });
 
+  const getDestinationPathFromFile = async () => {
+    window.electron.ipcRenderer.sendMessage('directory-selected', []);
+  };
+
   window.electron.ipcRenderer.on('directory-selected', (event) => {
     setDestinationPath(event[0]);
-    console.log(event[0]);
   });
   return (
     <div>
       <table>
         <tr>
           <td>
-            <Button
-              onClick={() => {
-                window.electron.ipcRenderer.sendMessage(
-                  'directory-selected',
-                  []
-                );
-              }}
-            >
+            <Button onClick={getDestinationPathFromFile}>
               Select Directory
             </Button>
             <Typography.Text>{filePath}</Typography.Text>
